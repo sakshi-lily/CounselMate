@@ -1,12 +1,16 @@
 // src/pages/Dashboard.jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import UserForm from "./UserForm";
 import AptitudeTest from "./Aptitude";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { ArrowRight } from "lucide-react";
 
 export default function Dashboard() {
+  const navigate = useNavigate();
+  const { logoutContext } = useContext(AuthContext);
   const [formDone, setFormDone] = useState(false);
   const [testDone, setTestDone] = useState(false);
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -38,8 +42,9 @@ export default function Dashboard() {
           // No profile yet → show the form
           setFormDone(false);
         } else if (err.response?.status === 401) {
-          console.warn("Unauthorized: please log in first.");
-          setFormDone(false);
+          console.warn("Session expired or unauthorized.");
+          logoutContext();
+          navigate("/signin");
         } else {
           console.error("Failed to fetch profile", err);
           setFormDone(false);

@@ -17,7 +17,7 @@ const port = process.env.PORT || 5000;
 
 // Enable CORS for all routes and pre-flight checks
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: ["http://localhost:5173", "http://localhost:5174"], // frontend URLs
   credentials: true, // allows cookies/session
 })); // Enable pre-flight for all routes
 

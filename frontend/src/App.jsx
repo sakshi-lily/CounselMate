@@ -1,6 +1,8 @@
 // App.jsx
 import React, { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ImpactSection from "./components/ImpactSection";
@@ -11,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   const location = useLocation();
+  const { user, loading } = useContext(AuthContext);
 
   useEffect(() => {
     const scrollToId = location.state?.scrollTo;
@@ -23,6 +26,10 @@ export default function App() {
       }
     }
   }, [location]);
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center bg-black text-white">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
@@ -38,9 +45,9 @@ export default function App() {
             </>
           }
         />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
+        <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <SignUp />} />
+        <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/signin" />} />
       </Routes>
     </div>
   );

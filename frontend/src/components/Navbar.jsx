@@ -1,10 +1,18 @@
 // components/Navbar.jsx
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logoutContext } = useContext(AuthContext);
+
+  const handleLogout = async () => {
+    await logoutContext();
+    navigate("/");
+  };
 
   const handleScrollOrNavigate = (sectionId) => {
     if (location.pathname === "/") {
@@ -40,16 +48,34 @@ export default function Navbar() {
 
         {/* Auth Buttons */}
         <div className="flex space-x-4">
-          <Link to="/signin">
-            <button className="px-5 py-2 rounded-full border border-white text-white hover:bg-white hover:text-[#201942] transition">
-              Sign In
-            </button>
-          </Link>
-          <Link to="/signup">
-            <button className="px-5 py-2 rounded-full bg-[#bd5e2b] text-white font-semibold hover:bg-[#a04e25] transition">
-              Sign Up
-            </button>
-          </Link>
+          {user ? (
+            <>
+              <Link to="/dashboard">
+                <button className="px-5 py-2 rounded-full border border-white text-white hover:bg-white hover:text-[#201942] transition">
+                  Dashboard
+                </button>
+              </Link>
+              <button 
+                onClick={handleLogout}
+                className="px-5 py-2 rounded-full bg-red-600 text-white font-semibold hover:bg-red-700 transition"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/signin">
+                <button className="px-5 py-2 rounded-full border border-white text-white hover:bg-white hover:text-[#201942] transition">
+                  Sign In
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button className="px-5 py-2 rounded-full bg-[#bd5e2b] text-white font-semibold hover:bg-[#a04e25] transition">
+                  Sign Up
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
