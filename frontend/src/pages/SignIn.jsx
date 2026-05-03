@@ -14,10 +14,15 @@ export default function SignIn() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const isSubmitting = React.useRef(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting.current) return;
+    
     setError("");
     setLoading(true);
+    isSubmitting.current = true;
 
     try {
       const res = await axios.post(
@@ -36,6 +41,7 @@ export default function SignIn() {
       setError(err.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
+      isSubmitting.current = false;
     }
   };
 

@@ -15,39 +15,37 @@ const authRoutes = require("./routes/authRoutes.js");
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Enable CORS for all routes and pre-flight checks
-app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:5174"], // frontend URLs
-  credentials: true, // allows cookies/session
-})); // Enable pre-flight for all routes
 
-// // Middleware
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:5174", "http://127.0.0.1:5173", "http://127.0.0.1:5174"], // frontend URLs
+  credentials: true, 
+})); 
+
+
 app.use(express.json());
 app.use(cookieParser());
 
 
-// ✅ Add session middleware here
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "supersecretkey", // use a strong secret in .env
+    secret: process.env.SESSION_SECRET || "supersecretkey", 
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: process.env.ATLAS_URI, // same as connectDB
-      ttl: 24 * 60 * 60, // 1 day
+      mongoUrl: process.env.ATLAS_URI, 
+      ttl: 24 * 60 * 60, 
     }),
     cookie: {
       httpOnly: true,
-      secure: false, // set true if using HTTPS
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      secure: false, 
+      maxAge: 1000 * 60 * 60 * 24, 
     },
   })
 );
 
-// Connect MongoDB
 connectDB();
 
-// Routes
+
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userProfileRoutes);
 app.use("/api/aptitude", aptitudeRoutes);
@@ -57,7 +55,7 @@ app.get("/", (req, res) => {
   res.send("🚀 API is running...");
 });
 
-// Start Server
+
 app.listen(port, () => {
   console.log(`🚀 Server is running on port: ${port}`);
 });

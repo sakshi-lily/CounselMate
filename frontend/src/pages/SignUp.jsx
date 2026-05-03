@@ -15,8 +15,11 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const isSubmitting = React.useRef(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting.current) return;
 
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
@@ -25,6 +28,7 @@ export default function SignUp() {
 
     try {
       setLoading(true);
+      isSubmitting.current = true;
       const res = await axios.post(
         `${serverURL}/api/auth/signup`,
         { username, email, password },
@@ -37,6 +41,7 @@ export default function SignUp() {
       setError(err.response?.data?.message || "Signup failed");
     } finally {
       setLoading(false);
+      isSubmitting.current = false;
     }
   };
 

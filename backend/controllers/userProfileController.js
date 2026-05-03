@@ -2,7 +2,7 @@ const UserProfile = require("../models/userProfile.js");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.js");
 
-// Middleware-like function to get user from JWT cookie
+
 const getUserFromToken = (req) => {
   try {
     const token = req.cookies.token;
@@ -14,24 +14,24 @@ const getUserFromToken = (req) => {
   }
 };
 
-// ---------------- CREATE USER PROFILE ----------------
+
 exports.createUserProfile = async (req, res) => {
   try {
     const userId = getUserFromToken(req);
     if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
-    const { name, age, phone, email, education, stream } = req.body;
+    const { name, age, phone, email, education, stream, profilePic } = req.body;
 
     if (!name || !age || !phone || !email || !education) {
       return res.status(400).json({ message: "All required fields must be filled" });
     }
 
-    const profileData = { user: userId, name, age, phone, email, education, stream };
+    const profileData = { user: userId, name, age, phone, email, education, stream, profilePic };
 
-    // Use findOneAndUpdate with upsert to create or update the profile
+    
     const profile = await UserProfile.findOneAndUpdate({ user: userId }, profileData, {
-      new: true, // return the updated document
-      upsert: true, // create if it doesn't exist
+      new: true, 
+      upsert: true, 
     });
 
     res.status(201).json({ message: "Profile saved successfully", profile });
@@ -41,7 +41,7 @@ exports.createUserProfile = async (req, res) => {
   }
 };
 
-// ---------------- GET USER PROFILE ----------------
+
 exports.getUserProfile = async (req, res) => {
   try {
     const userId = getUserFromToken(req);

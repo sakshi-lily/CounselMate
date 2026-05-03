@@ -1,4 +1,3 @@
-// backend/models/UserProfile.js
 const mongoose = require("mongoose");
 
 const userProfileSchema = new mongoose.Schema({
@@ -10,6 +9,7 @@ const userProfileSchema = new mongoose.Schema({
   education: String,
   stream: String,
   aptitudeScore: Number,
+  profilePic: String,
 });
 
 module.exports = mongoose.model("UserProfile", userProfileSchema);

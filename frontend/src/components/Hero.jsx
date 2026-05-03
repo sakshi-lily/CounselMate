@@ -1,7 +1,9 @@
 // components/Hero.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <header
       id="home"
@@ -29,10 +31,16 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 flex flex-col md:flex-row gap-4">
-          <button className="px-6 py-3 bg-[#bd5e2b] text-white rounded-full font-semibold hover:bg-[#a04e25] transition">
+          <button 
+            onClick={() => navigate('/start-journey')}
+            className="px-6 py-3 bg-[#bd5e2b] text-white rounded-full font-semibold hover:bg-[#a04e25] transition"
+          >
             Start Journey with CounselMate
           </button>
-          <button className="px-6 py-3 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#201942] transition">
+          <button 
+            onClick={() => navigate('/learn-more')}
+            className="px-6 py-3 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#201942] transition"
+          >
             Learn More about CounselMate
           </button>
         </div>

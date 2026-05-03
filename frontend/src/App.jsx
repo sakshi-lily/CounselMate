@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useEffect } from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -6,10 +5,12 @@ import { AuthContext } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import ImpactSection from "./components/ImpactSection";
-import HelpSection from "./components/HelpSection";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
+import StartJourney from "./pages/StartJourney";
+import LearnMore from "./pages/LearnMore";
+import OtherLayout from "./components/OtherLayout";
 
 export default function App() {
   const location = useLocation();
@@ -22,7 +23,7 @@ export default function App() {
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" });
-        }, 100); // slight delay ensures DOM is loaded
+        }, 100); 
       }
     }
   }, [location]);
@@ -41,12 +42,15 @@ export default function App() {
             <>
               <Hero />
               <ImpactSection />
-              <HelpSection />
             </>
           }
         />
-        <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
-        <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <SignUp />} />
+        <Route element={<OtherLayout />}>
+          <Route path="/signin" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
+          <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <SignUp />} />
+          <Route path="/start-journey" element={<StartJourney />} />
+          <Route path="/learn-more" element={<LearnMore />} />
+        </Route>
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/signin" />} />
       </Routes>
     </div>

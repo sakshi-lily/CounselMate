@@ -1,7 +1,6 @@
 // controllers/aptitudeController.js
-const Aptitude = require("../models/Aptitude.js"); // for saving scores
+const Aptitude = require("../models/Aptitude.js");
 
-// ---------------- GENERATE DUMMY QUESTIONS ----------------
 const generateQuestions = async (req, res) => {
   try {
     const questions = [
@@ -64,11 +63,10 @@ const generateQuestions = async (req, res) => {
   }
 };
 
-// ---------------- SAVE USER SCORE ----------------
 const saveScore = async (req, res) => {
   try {
     const { score } = req.body;
-    const userId = req.user._id; // from authMiddleware
+    const userId = req.user._id; 
 
     const result = await Aptitude.create({ user: userId, score });
     res.status(201).json({ message: "Score saved successfully", result });

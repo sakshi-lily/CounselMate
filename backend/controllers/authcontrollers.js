@@ -2,18 +2,16 @@ const User = require("../models/user.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-// Signup
+
 exports.signup = async (req, res) => {
   try {
     const { email, password, username } = req.body;
 
-    // Check if a user with this email or username already exists
     const userExists = await User.findOne({ $or: [{ email }, { username }] });
     if (userExists) {
       return res.status(400).json({ message: "User already exists with that email or username" });
     }
 
-    // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await User.create({
@@ -25,7 +23,7 @@ exports.signup = async (req, res) => {
     res.status(201).json({ message: "Signup successful", user: user.toObject({ getters: false }) });
   } catch (err) {
     if (err.code === 11000) {
-      // This handles the duplicate key error if it occurs
+      
       return res.status(400).json({ message: "Username or email already exists." });
     }
     console.error("Signup Error:", err);
@@ -33,20 +31,19 @@ exports.signup = async (req, res) => {
   }
 };
 
-// Login
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
-    // Check if user exists and the password is correct
+    
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-    // Set HTTP-only cookie
+    
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -61,13 +58,17 @@ exports.login = async (req, res) => {
   }
 };
 
-// Logout
+
 exports.logout = async (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
   res.json({ message: "Logged out successfully" });
 };
 
-// Get current user
+
 exports.getCurrentUser = async (req, res) => {
   try {
     const token = req.cookies.token;

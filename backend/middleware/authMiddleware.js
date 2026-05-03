@@ -5,7 +5,7 @@ module.exports = async function authMiddleware(req, res, next) {
   try {
     let token = req.cookies?.token;
 
-    // If no cookie, check Authorization header
+   
     if (!token && req.headers.authorization) {
       const parts = req.headers.authorization.split(" ");
       if (parts[0] === "Bearer" && parts[1]) token = parts[1];
@@ -17,7 +17,7 @@ module.exports = async function authMiddleware(req, res, next) {
     const user = await User.findById(decoded.id).select("-password");
     if (!user) return res.status(401).json({ message: "User not found" });
 
-    req.user = user; // attach user to request
+    req.user = user; 
     next();
   } catch (err) {
     console.error("AuthMiddleware error:", err);

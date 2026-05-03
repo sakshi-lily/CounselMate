@@ -41,9 +41,6 @@ export default function Navbar() {
           <button onClick={() => handleScrollOrNavigate("impact")} className="hover:text-[#bd5e2b] transition">
             Impact
           </button>
-          <button onClick={() => handleScrollOrNavigate("help")} className="hover:text-[#bd5e2b] transition">
-            Help
-          </button>
         </div>
 
         {/* Auth Buttons */}

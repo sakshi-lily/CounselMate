@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Define the Mongoose schema for the College collection
 const CollegeSchema = new mongoose.Schema({
     collegeName: {
         type: String,
@@ -50,11 +49,11 @@ const CollegeSchema = new mongoose.Schema({
         required: true
     }
 }, {
-    // Mongoose options
-    timestamps: true // Adds createdAt and updatedAt timestamps
+
+    timestamps: true 
 });
 
-// Create and export the Mongoose model
+
 const College = mongoose.model("College", CollegeSchema);
 
 module.exports = College;

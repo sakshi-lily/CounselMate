@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import UserForm from "./UserForm";
 import AptitudeTest from "./Aptitude";
+import Profile from "./Profile";
+import Guide from "./Guide";
+import Roadmap from "./Roadmap";
+import Help from "./Help";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { ArrowRight } from "lucide-react";
 
@@ -58,7 +62,7 @@ export default function Dashboard() {
   }, []);
 
   // Handle aptitude test completion
-  const handleTestComplete = async (userScore) => {
+  const handleTestComplete = async (userScore, testStream) => {
     try {
       await axios.post(
         "http://localhost:5000/api/aptitude/score",
@@ -68,6 +72,9 @@ export default function Dashboard() {
 
       setScore(userScore);
       setTestDone(true);
+      if (testStream) {
+        setUserProfile(prev => ({ ...prev, testStream }));
+      }
       setActiveSection("progress");
     } catch (err) {
       console.error(err);
@@ -242,22 +249,88 @@ export default function Dashboard() {
           </div>
         )}
 
+        {/* Profile Section */}
+        {activeSection === "profile" && (
+          <div className="animate-fadeIn">
+            <Profile 
+              userProfile={userProfile} 
+              onProfileUpdate={(newProfile) => setUserProfile(newProfile)} 
+            />
+          </div>
+        )}
+
         {/* Test & Progress Section */}
         {activeSection === "progress" && (
-          <div>
-            <h1 className="text-3xl font-bold mb-6">Test & Progress</h1>
+          <div className="animate-fadeIn animate-slideInUp">
+            <h1 className="text-3xl font-extrabold mb-8 decoration-[#bd5e2b] underline decoration-4 underline-offset-8">Test & Progress</h1>
             {!testDone ? (
-              <AptitudeTest onComplete={handleTestComplete} />
+              <AptitudeTest userProfile={userProfile} onComplete={handleTestComplete} />
             ) : (
-              <div className="bg-gray-900 p-6 rounded-2xl shadow-lg">
-                <h2 className="text-xl font-semibold mb-4">
-                  ✅ Aptitude Test Completed
-                </h2>
-                <p className="text-gray-400 mb-4">
-                  Your score: <strong>{score}</strong>
-                </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-xl backdrop-blur-sm">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-3xl mb-6 shadow-[0_0_20px_rgba(52,211,153,0.3)]">
+                    ✅
+                  </div>
+                  <h2 className="text-2xl font-bold mb-2">Aptitude Test Completed</h2>
+                  <p className="text-gray-400 text-lg mb-6">You've successfully finished your assessment.</p>
+                  
+                  <div className="bg-black/30 rounded-2xl p-6 border border-white/5 inline-block">
+                    <p className="text-sm text-gray-400 uppercase tracking-widest mb-1">Total Score</p>
+                    <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#bd5e2b] to-[#e87a3e]">
+                      {score} <span className="text-2xl text-gray-600">/ 10</span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Provide detailed progress insights */}
+                <div className="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-xl backdrop-blur-sm flex flex-col items-center">
+                  <h2 className="text-xl font-bold mb-4 w-full text-left">Your Career Affinity</h2>
+                  <div className="flex-1 flex items-center justify-center w-full">
+                    <PieChart width={300} height={250}>
+                      <Pie
+                        data={interestData}
+                        cx="50%"
+                        cy="50%"
+                        innerRadius={60}
+                        outerRadius={90}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        {interestData.map((entry, index) => (
+                          <Cell key={index} fill={COLORS[index % COLORS.length]} stroke="rgba(255,255,255,0.1)" strokeWidth={2} />
+                        ))}
+                      </Pie>
+                      <Tooltip 
+                        contentStyle={{ backgroundColor: "#0a0a0a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px", color: "#fff" }} 
+                        itemStyle={{ color: "#fff" }}
+                      />
+                      <Legend verticalAlign="bottom" height={36} iconType="circle" />
+                    </PieChart>
+                  </div>
+                </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Guide Section */}
+        {activeSection === "guide" && (
+          <div className="animate-fadeIn">
+            <Guide userProfile={userProfile} score={score} />
+          </div>
+        )}
+
+        {/* Roadmap Section */}
+        {activeSection === "roadmap" && (
+          <div className="animate-fadeIn">
+            <Roadmap userProfile={userProfile} score={score} />
+          </div>
+        )}
+
+        {/* Help Section */}
+        {activeSection === "help" && (
+          <div className="animate-fadeIn">
+            <Help />
           </div>
         )}
       </main>
