@@ -18,3 +18,32 @@ CounselMate is a web-based career guidance platform designed to help students ma
 - HTML5
 - CSS3
 - JavaScript
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- MongoDB
+
+### Tools
+- Git
+- GitHub
+- VS Code
+
+## 📂 Project Structure
+
+CounselMate/
+├── frontend/
+│ ├── src/
+│ ├── public/
+│ └── package.json
+│
+├── backend/
+│ ├── controllers/
+│ ├── models/
+│ ├── routes/
+│ ├── config/
+│ └── server.js
+│
+└── README.md
