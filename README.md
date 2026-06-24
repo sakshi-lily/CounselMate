@@ -48,8 +48,6 @@ CounselMate/
 │
 └── README.md
 
-## ⚙️ Installation
-### Clone the Repository
+🎯 Objective
+The primary goal of CounselMate is to assist students who are uncertain about selecting the right academic stream or career path by providing structured guidance and relevant information.
 
-```bash
-git clone https://github.com/sakshi-lily/CounselMate.git
