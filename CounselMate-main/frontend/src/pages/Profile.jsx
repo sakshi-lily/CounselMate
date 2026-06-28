@@ -64,17 +64,17 @@ export default function Profile({ userProfile, onProfileUpdate }) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto animation-fade-in relative z-10 w-full">
+    <div className="max-w-4xl mx-auto animation-fade-in relative z-10 w-full font-body">
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 rounded-3xl opacity-50 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-[#bd5e2b] rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-[#332670] rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary/20 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-violet-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
-      <div className="bg-gray-900/60 backdrop-blur-xl border border-gray-800/50 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+      <div className="glass-card p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
         
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row items-center gap-6 mb-10 pb-8 border-b border-gray-800">
+        <div className="flex flex-col md:flex-row items-center gap-6 mb-10 pb-8 border-b border-outline-variant/20">
           <div className="relative group">
             <input 
               type="file" 
@@ -84,12 +84,12 @@ export default function Profile({ userProfile, onProfileUpdate }) {
               className="hidden" 
             />
             <label htmlFor="photo-upload" className="block cursor-pointer">
-              <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-[#bd5e2b] to-[#51369a] flex items-center justify-center p-1 shadow-lg shadow-[#bd5e2b]/20 transition-transform duration-300 group-hover:scale-105">
-                <div className="w-full h-full bg-gray-900 rounded-full flex items-center justify-center overflow-hidden relative">
+              <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-primary to-purple-500 flex items-center justify-center p-1 shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:scale-105">
+                <div className="w-full h-full bg-surface rounded-full flex items-center justify-center overflow-hidden relative">
                   {formData.profilePic ? (
                     <img src={formData.profilePic} alt="Profile" className="w-full h-full object-cover" />
                   ) : (
-                    <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+                    <span className="text-4xl font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent font-headline">
                       {formData.name ? formData.name.charAt(0).toUpperCase() : <User size={40} className="text-gray-400" />}
                     </span>
                   )}
@@ -98,18 +98,18 @@ export default function Profile({ userProfile, onProfileUpdate }) {
                   </div>
                 </div>
               </div>
-              <div className="absolute bottom-0 right-0 bg-[#bd5e2b] w-8 h-8 rounded-full border-4 border-gray-900 flex items-center justify-center transform translate-x-2 translate-y-2 z-10">
-                <div className="w-2 h-2 bg-white rounded-full animate-ping absolute"></div>
-                <div className="w-2 h-2 bg-white rounded-full"></div>
+              <div className="absolute bottom-0 right-0 bg-primary w-8 h-8 rounded-full border-4 border-surface flex items-center justify-center transform translate-x-2 translate-y-2 z-10">
+                <div className="w-2 h-2 bg-on-primary rounded-full animate-ping absolute"></div>
+                <div className="w-2 h-2 bg-on-primary rounded-full"></div>
               </div>
             </label>
           </div>
           
           <div className="text-center md:text-left">
-            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-2">
+            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-2 font-headline">
               Your Profile
             </h2>
-            <p className="text-gray-400 font-medium">Manage your personal information and education details.</p>
+            <p className="text-on-surface-variant font-medium">Manage your personal information and education details.</p>
           </div>
         </div>
 
@@ -132,10 +132,10 @@ export default function Profile({ userProfile, onProfileUpdate }) {
             
             {/* Full Name */}
             <div className="space-y-2 group">
-              <label className="text-sm font-semibold text-gray-400 ml-1 transition-colors group-focus-within:text-[#bd5e2b]">Full Name</label>
+              <label className="text-sm font-semibold text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary">Full Name</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <User size={18} className="text-gray-500 group-focus-within:text-[#bd5e2b] transition-colors" />
+                  <User size={18} className="text-gray-500 group-focus-within:text-primary transition-colors" />
                 </div>
                 <input
                   type="text"
@@ -143,7 +143,7 @@ export default function Profile({ userProfile, onProfileUpdate }) {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="John Doe"
-                  className="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#bd5e2b] focus:ring-1 focus:ring-[#bd5e2b] transition-all shadow-inner"
+                  className="w-full bg-surface/50 border border-outline-variant/30 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   required
                 />
               </div>
@@ -151,10 +151,10 @@ export default function Profile({ userProfile, onProfileUpdate }) {
 
             {/* Email */}
             <div className="space-y-2 group">
-              <label className="text-sm font-semibold text-gray-400 ml-1 transition-colors group-focus-within:text-[#bd5e2b]">Email Address</label>
+              <label className="text-sm font-semibold text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary">Email Address</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail size={18} className="text-gray-500 group-focus-within:text-[#bd5e2b] transition-colors" />
+                  <Mail size={18} className="text-gray-500 group-focus-within:text-primary transition-colors" />
                 </div>
                 <input
                   type="email"
@@ -162,7 +162,7 @@ export default function Profile({ userProfile, onProfileUpdate }) {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
-                  className="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#bd5e2b] focus:ring-1 focus:ring-[#bd5e2b] transition-all shadow-inner"
+                  className="w-full bg-surface/50 border border-outline-variant/30 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   required
                 />
               </div>
@@ -170,10 +170,10 @@ export default function Profile({ userProfile, onProfileUpdate }) {
 
             {/* Age */}
             <div className="space-y-2 group">
-              <label className="text-sm font-semibold text-gray-400 ml-1 transition-colors group-focus-within:text-[#bd5e2b]">Age</label>
+              <label className="text-sm font-semibold text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary">Age</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Calendar size={18} className="text-gray-500 group-focus-within:text-[#bd5e2b] transition-colors" />
+                  <Calendar size={18} className="text-gray-500 group-focus-within:text-primary transition-colors" />
                 </div>
                 <input
                   type="number"
@@ -181,7 +181,7 @@ export default function Profile({ userProfile, onProfileUpdate }) {
                   value={formData.age}
                   onChange={handleChange}
                   placeholder="18"
-                  className="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#bd5e2b] focus:ring-1 focus:ring-[#bd5e2b] transition-all shadow-inner"
+                  className="w-full bg-surface/50 border border-outline-variant/30 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   required
                 />
               </div>
@@ -189,10 +189,10 @@ export default function Profile({ userProfile, onProfileUpdate }) {
 
             {/* Phone Number */}
             <div className="space-y-2 group">
-              <label className="text-sm font-semibold text-gray-400 ml-1 transition-colors group-focus-within:text-[#bd5e2b]">Phone Number</label>
+              <label className="text-sm font-semibold text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary">Phone Number</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Phone size={18} className="text-gray-500 group-focus-within:text-[#bd5e2b] transition-colors" />
+                  <Phone size={18} className="text-gray-500 group-focus-within:text-primary transition-colors" />
                 </div>
                 <input
                   type="tel"
@@ -200,7 +200,7 @@ export default function Profile({ userProfile, onProfileUpdate }) {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="+91 9876543210"
-                  className="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#bd5e2b] focus:ring-1 focus:ring-[#bd5e2b] transition-all shadow-inner"
+                  className="w-full bg-surface/50 border border-outline-variant/30 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   required
                 />
               </div>
@@ -208,16 +208,16 @@ export default function Profile({ userProfile, onProfileUpdate }) {
 
             {/* Education */}
             <div className="space-y-2 group md:col-span-2">
-              <label className="text-sm font-semibold text-gray-400 ml-1 transition-colors group-focus-within:text-[#bd5e2b]">Education Level</label>
+              <label className="text-sm font-semibold text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary">Education Level</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <GraduationCap size={18} className="text-gray-500 group-focus-within:text-[#bd5e2b] transition-colors" />
+                  <GraduationCap size={18} className="text-gray-500 group-focus-within:text-primary transition-colors" />
                 </div>
                 <select
                   name="education"
                   value={formData.education}
                   onChange={handleChange}
-                  className="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#bd5e2b] focus:ring-1 focus:ring-[#bd5e2b] transition-all shadow-inner appearance-none"
+                  className="w-full bg-surface/50 border border-outline-variant/30 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner appearance-none"
                   required
                 >
                   <option value="" className="bg-gray-800">Select Education</option>
@@ -236,10 +236,10 @@ export default function Profile({ userProfile, onProfileUpdate }) {
             {/* Stream */}
             {formData.education !== '10th' && (
               <div className="space-y-2 group md:col-span-2 animate-fadeIn">
-                <label className="text-sm font-semibold text-gray-400 ml-1 transition-colors group-focus-within:text-[#bd5e2b]">Stream / Specialization</label>
+                <label className="text-sm font-semibold text-on-surface-variant ml-1 transition-colors group-focus-within:text-primary">Stream / Specialization</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <BookOpen size={18} className="text-gray-500 group-focus-within:text-[#bd5e2b] transition-colors" />
+                    <BookOpen size={18} className="text-gray-500 group-focus-within:text-primary transition-colors" />
                   </div>
                   <input
                     type="text"
@@ -247,7 +247,7 @@ export default function Profile({ userProfile, onProfileUpdate }) {
                     value={formData.stream}
                     onChange={handleChange}
                     placeholder="e.g. Science, Arts, Commerce, B.Tech"
-                    className="w-full bg-gray-900/50 border border-gray-700 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-[#bd5e2b] focus:ring-1 focus:ring-[#bd5e2b] transition-all shadow-inner"
+                    className="w-full bg-surface/50 border border-outline-variant/30 text-white rounded-xl pl-11 pr-4 py-3.5 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-inner"
                   />
                 </div>
               </div>
@@ -255,11 +255,11 @@ export default function Profile({ userProfile, onProfileUpdate }) {
           </div>
           
           {/* Submit Button */}
-          <div className="pt-6 border-t border-gray-800">
+          <div className="pt-6 border-t border-outline-variant/20 flex justify-end">
             <button
               type="submit"
               disabled={loading}
-              className="w-full sm:w-auto sm:ml-auto flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#bd5e2b] to-[#a44e22] hover:from-[#c96936] hover:to-[#bd5e2b] text-white font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(189,94,43,0.5)] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              className="w-full sm:w-auto px-8 py-4 bg-primary text-on-primary font-bold rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/20 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
             >
               <Save size={20} className={loading ? 'animate-pulse' : ''} />
               {loading ? "Saving Changes..." : "Save Changes"}

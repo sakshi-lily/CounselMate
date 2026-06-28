@@ -19,13 +19,13 @@ export default function Hero() {
 
       {/* Overlay content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
+        <h1 className="text-5xl md:text-7xl font-extrabold leading-tight font-headline">
           <span className="block text-white">Unlock Your Career</span>
-          <span className="block text-[#bd5e2b]">
+          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-400">
             Potential with CounselMate
           </span>
         </h1>
-        <p className="mt-4 text-lg md:text-xl text-[#ffffffcc] max-w-2xl">
+        <p className="mt-4 text-lg md:text-xl text-on-surface-variant max-w-2xl">
           Discover the right path, build your future roadmap, and get
           motivated to achieve success.
         </p>
@@ -33,13 +33,13 @@ export default function Hero() {
         <div className="mt-8 flex flex-col md:flex-row gap-4">
           <button 
             onClick={() => navigate('/start-journey')}
-            className="px-6 py-3 bg-[#bd5e2b] text-white rounded-full font-semibold hover:bg-[#a04e25] transition"
+            className="px-6 py-3 bg-primary text-on-primary rounded-full font-bold hover:bg-primary/80 hover:shadow-lg hover:shadow-primary/20 transition duration-300"
           >
             Start Journey with CounselMate
           </button>
           <button 
             onClick={() => navigate('/learn-more')}
-            className="px-6 py-3 border border-white text-white rounded-full font-semibold hover:bg-white hover:text-[#201942] transition"
+            className="px-6 py-3 border border-white/20 text-white rounded-full font-bold hover:bg-primary hover:text-on-primary hover:border-transparent transition duration-300"
           >
             Learn More about CounselMate
           </button>

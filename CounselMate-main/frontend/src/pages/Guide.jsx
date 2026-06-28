@@ -96,33 +96,33 @@ export default function Guide({ userProfile, score }) {
   }, [userProfile, score]);
 
   return (
-    <div className="max-w-5xl mx-auto animation-fade-in relative z-10 w-full mb-12">
+    <div className="max-w-5xl mx-auto animation-fade-in relative z-10 w-full mb-12 font-body">
       {/* Decorative background */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 rounded-3xl opacity-40 pointer-events-none">
-        <div className="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] bg-[#bd5e2b] rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-[#51369a] rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse" style={{ animationDelay: '3s' }}></div>
+        <div className="absolute top-[-5%] right-[-5%] w-[500px] h-[500px] bg-primary/20 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-[400px] h-[400px] bg-violet-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-20 animate-pulse" style={{ animationDelay: '3s' }}></div>
       </div>
 
-      <div className="bg-gray-900/60 backdrop-blur-xl border border-gray-800/50 p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+      <div className="glass-card p-8 md:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 pb-8 border-b border-gray-800">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 pb-8 border-b border-outline-variant/20">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#bd5e2b]/10 border border-[#bd5e2b]/30 text-[#bd5e2b] text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold mb-4 font-label">
               <Sparkles size={14} /> AI-Powered Career Advice
             </div>
-            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-2">
+            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400 mb-2 font-headline">
               Your Personalized Guide
             </h2>
-            <p className="text-gray-400 font-medium max-w-2xl">
+            <p className="text-on-surface-variant font-medium max-w-2xl">
               Based on your profile as a <span className="text-white font-semibold">{userProfile?.education || "student"}</span> {userProfile?.stream ? `in ${userProfile.stream}` : ""} 
-              with an aptitude score of <span className="text-[#bd5e2b] font-bold">{guideData.aptitudeScore}</span>, we have curated a tailored success path for you.
+              with an aptitude score of <span className="text-primary font-bold">{guideData.aptitudeScore}</span>, we have curated a tailored success path for you.
             </p>
           </div>
           
-          <div className="flex flex-col items-center justify-center bg-gray-900/80 border border-gray-700 p-6 rounded-2xl shadow-inner min-w-[160px]">
-            <div className="text-gray-400 text-sm font-semibold mb-1 uppercase tracking-wider">Aptitude Score</div>
-            <div className="text-5xl font-black bg-gradient-to-tr from-[#bd5e2b] to-[#f39c12] bg-clip-text text-transparent">
+          <div className="flex flex-col items-center justify-center bg-surface/50 border border-outline-variant/20 p-6 rounded-2xl shadow-inner min-w-[160px]">
+            <div className="text-on-surface-variant text-sm font-semibold mb-1 uppercase tracking-wider font-label">Aptitude Score</div>
+            <div className="text-5xl font-black bg-gradient-to-tr from-primary to-violet-400 bg-clip-text text-transparent">
               {guideData.aptitudeScore > 0 ? guideData.aptitudeScore : "--"}
             </div>
           </div>
@@ -134,23 +134,23 @@ export default function Guide({ userProfile, score }) {
           {/* Main Path Suggestions */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-gradient-to-br from-[#bd5e2b] to-[#a44e22] rounded-xl shadow-lg">
-                <Compass className="text-white" size={24} />
+              <div className="p-3 bg-gradient-to-br from-primary to-violet-500 rounded-xl shadow-lg">
+                <Compass className="text-on-primary" size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-white">{guideData.pathTitle}</h3>
+              <h3 className="text-2xl font-bold text-white font-headline">{guideData.pathTitle}</h3>
             </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {guideData.recommendations.map((rec, index) => (
-                <div key={index} className="group relative bg-gray-800/40 hover:bg-gray-800 border border-gray-700/50 hover:border-[#bd5e2b]/50 p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(189,94,43,0.15)] hover:-translate-y-1">
-                  <div className="absolute top-4 right-4 text-gray-600 group-hover:text-[#bd5e2b] transition-colors">
+                <div key={index} className="group relative bg-surface-variant/20 hover:bg-surface-variant/40 border border-outline-variant/10 hover:border-primary/50 p-6 rounded-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(167,139,250,0.15)] hover:-translate-y-1">
+                  <div className="absolute top-4 right-4 text-gray-600 group-hover:text-primary transition-colors">
                     <Target size={20} />
                   </div>
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-900 border border-gray-700 text-[#bd5e2b] font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-surface border border-outline-variant/20 text-primary font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
                     {index + 1}
                   </div>
                   <h4 className="text-lg font-bold text-gray-200 group-hover:text-white mb-2">{rec}</h4>
-                  <p className="text-sm text-gray-500">A strong match based on your profile assessing.</p>
+                  <p className="text-sm text-on-surface-variant">A strong match based on your profile assessing.</p>
                 </div>
               ))}
             </div>
@@ -160,15 +160,15 @@ export default function Guide({ userProfile, score }) {
           <div className="space-y-8">
             
             {/* Key Skills */}
-            <div className="bg-gray-800/40 border border-gray-700/50 rounded-2xl p-6">
+            <div className="bg-surface-variant/20 border border-outline-variant/10 rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-5">
-                <Zap className="text-[#f39c12]" size={20} />
-                <h4 className="text-xl font-bold text-white">Focus Skills</h4>
+                <Zap className="text-yellow-400" size={20} />
+                <h4 className="text-xl font-bold text-white font-headline">Focus Skills</h4>
               </div>
               <ul className="space-y-3">
                 {guideData.skills.map((skill, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-gray-300">
-                    <div className="w-2 h-2 rounded-full bg-[#f39c12]"></div>
+                    <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                     {skill}
                   </li>
                 ))}
@@ -176,13 +176,13 @@ export default function Guide({ userProfile, score }) {
             </div>
 
             {/* Next Actionable Steps */}
-            <div className="bg-gray-800/40 border border-gray-700/50 rounded-2xl p-6 relative overflow-hidden">
+            <div className="bg-surface-variant/20 border border-outline-variant/10 rounded-2xl p-6 relative overflow-hidden">
               <div className="absolute -right-4 -bottom-4 opacity-10">
                 <TrendingUp size={100} />
               </div>
               <div className="flex items-center gap-3 mb-5 relative z-10">
                 <BookOpen className="text-blue-400" size={20} />
-                <h4 className="text-xl font-bold text-white">Action Plan</h4>
+                <h4 className="text-xl font-bold text-white font-headline">Action Plan</h4>
               </div>
               <div className="space-y-4 relative z-10">
                 {guideData.nextSteps.map((step, idx) => (
@@ -192,7 +192,7 @@ export default function Guide({ userProfile, score }) {
                         {idx + 1}
                       </div>
                       {idx !== guideData.nextSteps.length - 1 && (
-                        <div className="w-px h-full bg-gray-700 my-1"></div>
+                        <div className="w-px h-full bg-outline-variant/50 my-1"></div>
                       )}
                     </div>
                     <p className="text-gray-300 text-sm pt-0.5">{step}</p>
@@ -205,12 +205,12 @@ export default function Guide({ userProfile, score }) {
         </div>
 
         {/* Call to action */}
-        <div className="mt-10 pt-8 border-t border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm flex items-center gap-2">
+        <div className="mt-10 pt-8 border-t border-outline-variant/20 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-on-surface-variant text-sm flex items-center gap-2">
             <Star className="text-yellow-500" size={16} /> Update your profile or take the test again to refine these suggestions.
           </p>
-          <button className="px-6 py-2.5 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-xl border border-gray-700 transition-colors flex items-center gap-2 group">
-            <Briefcase size={16} className="group-hover:text-[#bd5e2b] transition-colors" /> Explore Careers
+          <button className="px-6 py-2.5 bg-surface-variant/40 hover:bg-surface-variant/70 text-white font-semibold rounded-xl border border-outline-variant/20 transition-colors flex items-center gap-2 group">
+            <Briefcase size={16} className="group-hover:text-primary transition-colors" /> Explore Careers
           </button>
         </div>
 

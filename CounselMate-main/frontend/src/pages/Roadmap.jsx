@@ -183,21 +183,20 @@ export default function Roadmap({ userProfile, score }) {
   }, [userProfile]);
 
   return (
-    <div className="w-full text-white pb-12">
+    <div className="w-full text-[#f8fafc] pb-12 font-body">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Your Personalized <span className="text-[#bd5e2b]">Career Roadmap</span>
+          <h1 className="text-4xl md:text-5xl font-black mb-4 font-headline">
+            Your Personalized <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-400">Career Roadmap</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-on-surface-variant text-lg max-w-2xl mx-auto">
             Based on your profile ({profileDisplay}) and aptitude score ({score || 0}/10), here is a guided path tailored to your performance to help you achieve your career aspirations.
           </p>
         </div>
 
-        <div className="relative border-l border-white/20 ml-4 md:ml-6">
+        <div className="relative border-l border-outline-variant/30 ml-4 md:ml-6">
           {roadmapData.map((item, index) => {
             // Determine status dynamically based on current user stage (simulated)
-            // In a real app, this would be tied to user progress tracking
             let status = "Upcoming";
             if (index === 0) status = "Completed";
             if (index === 1) status = "In Progress";
@@ -205,29 +204,29 @@ export default function Roadmap({ userProfile, score }) {
             return (
               <div key={index} className="mb-12 ml-8 group">
                 {/* Timeline Dot */}
-                <span className={`absolute flex items-center justify-center w-6 h-6 rounded-full -left-3 ring-4 ring-black
-                  ${status === 'Completed' ? 'bg-[#bd5e2b]' : 
-                    status === 'In Progress' ? 'bg-orange-400' : 'bg-gray-600'}
+                <span className={`absolute flex items-center justify-center w-6 h-6 rounded-full -left-3 ring-4 ring-surface transition duration-300
+                  ${status === 'Completed' ? 'bg-primary shadow-[0_0_10px_rgba(167,139,250,0.5)]' : 
+                    status === 'In Progress' ? 'bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.5)]' : 'bg-surface-variant'}
                 `}>
                 </span>
                 
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition duration-300 hover:-translate-y-1">
+                <div className="glass-card rounded-2xl p-6 hover:bg-white/[0.08] hover:border-primary/20 transition duration-300 hover:-translate-y-1">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                    <h3 className="flex items-center text-xl font-bold text-white mb-2 md:mb-0">
+                    <h3 className="flex items-center text-xl font-extrabold text-white mb-2 md:mb-0 font-headline">
                       {item.phase}
                     </h3>
-                    <span className="text-sm font-medium px-3 py-1 rounded-full bg-white/10 text-[#bd5e2b] w-fit">
+                    <span className="text-sm font-bold px-3 py-1 rounded-full bg-primary/10 text-primary w-fit font-label">
                       {item.date}
                     </span>
                   </div>
-                  <h4 className="text-2xl font-semibold mb-3">{item.title}</h4>
-                  <p className="text-gray-400 leading-relaxed mb-4">
+                  <h4 className="text-2xl font-bold mb-3 text-white/90">{item.title}</h4>
+                  <p className="text-on-surface-variant leading-relaxed mb-4">
                     {item.description}
                   </p>
                   
-                  <span className={`text-sm font-semibold uppercase tracking-wider
+                  <span className={`text-sm font-bold uppercase tracking-wider
                     ${status === 'Completed' ? 'text-green-400' : 
-                      status === 'In Progress' ? 'text-yellow-400' : 'text-gray-500'}
+                      status === 'In Progress' ? 'text-blue-400' : 'text-on-surface-variant/40'}
                   `}>
                     {status}
                   </span>

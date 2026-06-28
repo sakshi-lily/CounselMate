@@ -110,7 +110,7 @@ export default function Dashboard() {
           { name: "Arts Stream", value: 20 },
         ];
 
-  const COLORS = ["#bd5e2b", "#332670", "#1e90ff", "#28a745"];
+  const COLORS = ["#a78bfa", "#3b82f6", "#10b981", "#f43f5e"];
 
   const roadmapSteps = [
     "Complete Profile",
@@ -137,20 +137,20 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white flex pt-[90px]">
+    <div className="min-h-screen bg-transparent text-[#f8fafc] flex pt-[90px] font-body">
       {/* Sidebar */}
-      <aside className="w-64 bg-gray-900 border-r border-gray-800 p-6">
-        <h2 className="text-xl font-bold mb-6">Menu</h2>
+      <aside className="w-64 glass-card border-r border-outline-variant/20 p-6 fixed left-0 top-[90px] bottom-0 hidden md:block">
+        <h2 className="text-xl font-headline font-black mb-6 text-primary">Menu</h2>
         <nav className="space-y-4">
           {["dashboard", "profile", "progress", "guide", "roadmap", "help"].map(
             (item) => (
               <button
                 key={item}
                 onClick={() => setActiveSection(item)}
-                className={`block w-full text-left px-4 py-2 rounded-lg transition ${
+                className={`block w-full text-left px-4 py-3 rounded-xl transition duration-300 ${
                   activeSection === item
-                    ? "bg-[#bd5e2b] text-white"
-                    : "hover:bg-gray-800"
+                    ? "bg-primary/20 text-primary border-l-4 border-primary font-bold shadow-lg shadow-primary/5"
+                    : "text-on-surface-variant hover:bg-surface-variant/40 hover:text-primary"
                 }`}
               >
                 {item === "dashboard" && "Dashboard"}
@@ -166,36 +166,36 @@ export default function Dashboard() {
       </aside>
 
       {/* Main Dashboard */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 md:ml-64">
         {/* Dashboard Section */}
         {activeSection === "dashboard" && (
           <div>
-            <h1 className="text-3xl font-bold mb-6">
-              Welcome, {userProfile.name} 👋
+            <h1 className="text-4xl font-headline font-black mb-6">
+              Welcome, <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-400">{userProfile.name}</span> 👋
             </h1>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Roadmap */}
-              <div className="bg-gray-900 p-6 rounded-2xl shadow-lg">
-                <h2 className="text-xl font-semibold mb-4">Career Roadmap</h2>
+              <div className="glass-card p-6 rounded-3xl shadow-xl hover:border-primary/20 transition-all duration-300">
+                <h2 className="text-xl font-bold mb-4 font-headline text-primary">Career Roadmap</h2>
                 <div className="space-y-4">
                   {roadmapSteps.map((step, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center space-x-3 bg-[#332670] hover:bg-[#bd5e2b] cursor-pointer px-4 py-3 rounded-lg transition"
+                      className="flex items-center space-x-3 bg-surface/50 border border-outline-variant/20 hover:bg-primary/10 hover:border-primary/30 cursor-pointer px-4 py-3.5 rounded-xl transition-all duration-300"
                       onClick={() => setActiveSection("roadmap")}
                     >
-                      <span className="font-bold">{idx + 1}</span>
+                      <span className="font-extrabold text-primary">{idx + 1}</span>
                       <span>{step}</span>
-                      <ArrowRight className="ml-auto" size={18} />
+                      <ArrowRight className="ml-auto text-primary" size={18} />
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* Interest Pie Chart */}
-              <div className="bg-gray-900 p-6 rounded-2xl shadow-lg flex flex-col items-center">
-                <h2 className="text-xl font-semibold mb-4">Your Interests</h2>
+              <div className="glass-card p-6 rounded-3xl shadow-xl flex flex-col items-center hover:border-primary/20 transition-all duration-300">
+                <h2 className="text-xl font-bold mb-4 font-headline text-primary">Your Interests</h2>
                 <PieChart width={300} height={250}>
                   <Pie
                     data={interestData}
@@ -210,35 +210,35 @@ export default function Dashboard() {
                     ))}
                   </Pie>
                   <Tooltip
-                    contentStyle={{ backgroundColor: "#1f2937", color: "#fff" }}
+                    contentStyle={{ backgroundColor: "#1e293b", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "12px", color: "#fff" }}
                   />
                   <Legend />
                 </PieChart>
               </div>
 
               {/* Career Guidance */}
-              <div className="bg-gray-900 p-6 rounded-2xl shadow-lg col-span-1">
-                <h2 className="text-xl font-semibold mb-4">Career Guidance</h2>
-                <ul className="list-disc list-inside space-y-2 text-gray-300 mb-4">
+              <div className="glass-card p-6 rounded-3xl shadow-xl hover:border-primary/20 transition-all duration-300">
+                <h2 className="text-xl font-bold mb-4 font-headline text-primary">Career Guidance</h2>
+                <ul className="list-disc list-inside space-y-3 text-on-surface-variant mb-4">
                   {careers.map((career, idx) => (
-                    <li key={idx}>{career}</li>
+                    <li key={idx} className="hover:text-primary transition duration-200">{career}</li>
                   ))}
                 </ul>
               </div>
 
               {/* Eligible Colleges */}
-              <div className="bg-gray-900 p-6 rounded-2xl shadow-lg col-span-1">
-                <h2 className="text-xl font-semibold mb-4">
+              <div className="glass-card p-6 rounded-3xl shadow-xl hover:border-primary/20 transition-all duration-300">
+                <h2 className="text-xl font-bold mb-4 font-headline text-primary">
                   Eligible State Govt. Colleges (J&K)
                 </h2>
                 <ul className="space-y-3">
                   {colleges.map((college, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center justify-between bg-gray-800 px-3 py-2 rounded-lg"
+                      className="flex items-center justify-between bg-surface/50 border border-outline-variant/20 px-4 py-3 rounded-xl hover:border-primary/10 transition-all duration-300"
                     >
                       <span>{college}</span>
-                      <button className="px-3 py-1 bg-[#bd5e2b] rounded-lg hover:bg-[#a44e22]">
+                      <button className="px-4 py-1.5 bg-primary text-on-primary font-bold rounded-full hover:bg-primary/80 transition duration-300 shadow-md shadow-primary/10">
                         Apply
                       </button>
                     </li>
@@ -261,30 +261,30 @@ export default function Dashboard() {
 
         {/* Test & Progress Section */}
         {activeSection === "progress" && (
-          <div className="animate-fadeIn animate-slideInUp">
-            <h1 className="text-3xl font-extrabold mb-8 decoration-[#bd5e2b] underline decoration-4 underline-offset-8">Test & Progress</h1>
+          <div className="animate-fadeIn">
+            <h1 className="text-3xl font-extrabold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-400 font-headline inline-block">Test & Progress</h1>
             {!testDone ? (
               <AptitudeTest userProfile={userProfile} onComplete={handleTestComplete} />
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-xl backdrop-blur-sm">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="glass-card p-8 rounded-3xl shadow-xl">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-3xl mb-6 shadow-[0_0_20px_rgba(52,211,153,0.3)]">
                     ✅
                   </div>
-                  <h2 className="text-2xl font-bold mb-2">Aptitude Test Completed</h2>
-                  <p className="text-gray-400 text-lg mb-6">You've successfully finished your assessment.</p>
+                  <h2 className="text-2xl font-bold mb-2 font-headline">Aptitude Test Completed</h2>
+                  <p className="text-on-surface-variant text-lg mb-6">You've successfully finished your assessment.</p>
                   
-                  <div className="bg-black/30 rounded-2xl p-6 border border-white/5 inline-block">
-                    <p className="text-sm text-gray-400 uppercase tracking-widest mb-1">Total Score</p>
-                    <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#bd5e2b] to-[#e87a3e]">
-                      {score} <span className="text-2xl text-gray-600">/ 10</span>
+                  <div className="bg-surface/50 rounded-2xl p-6 border border-outline-variant/20 inline-block">
+                    <p className="text-sm text-on-surface-variant uppercase tracking-widest mb-1">Total Score</p>
+                    <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-violet-400">
+                      {score} <span className="text-2xl text-on-surface-variant">/ 10</span>
                     </p>
                   </div>
                 </div>
 
                 {/* Provide detailed progress insights */}
-                <div className="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-xl backdrop-blur-sm flex flex-col items-center">
-                  <h2 className="text-xl font-bold mb-4 w-full text-left">Your Career Affinity</h2>
+                <div className="glass-card p-8 rounded-3xl shadow-xl flex flex-col items-center">
+                  <h2 className="text-xl font-bold mb-4 w-full text-left font-headline text-primary">Your Career Affinity</h2>
                   <div className="flex-1 flex items-center justify-center w-full">
                     <PieChart width={300} height={250}>
                       <Pie
@@ -301,7 +301,7 @@ export default function Dashboard() {
                         ))}
                       </Pie>
                       <Tooltip 
-                        contentStyle={{ backgroundColor: "#0a0a0a", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "12px", color: "#fff" }} 
+                        contentStyle={{ backgroundColor: "#1e293b", border: "1px solid rgba(255,255,255,0.05)", borderRadius: "12px", color: "#fff" }} 
                         itemStyle={{ color: "#fff" }}
                       />
                       <Legend verticalAlign="bottom" height={36} iconType="circle" />

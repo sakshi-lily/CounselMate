@@ -130,15 +130,15 @@ export default function AptitudeTest({ userProfile, onComplete }) {
 
   if (!testStarted) {
     return (
-      <div className="flex bg-[#0a0a0a] text-white rounded-2xl overflow-hidden shadow-2xl border border-white/10 min-h-[600px] items-center justify-center animate-fadeIn">
-        <div className="max-w-md w-full bg-white/5 p-8 rounded-xl border border-white/10 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-[#bd5e2b]">Before We Begin</h2>
-          <p className="text-gray-300 mb-6">
+      <div className="flex bg-transparent text-white rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/20 min-h-[600px] items-center justify-center animate-fadeIn font-body">
+        <div className="max-w-md w-full glass-card p-8 rounded-2xl border border-outline-variant/20 text-center">
+          <h2 className="text-3xl font-extrabold mb-4 text-primary font-headline">Before We Begin</h2>
+          <p className="text-on-surface-variant mb-6">
             Please select the stream or category you want to take the aptitude test for. This will tailor the questions to your interests.
           </p>
           
           <select 
-            className="w-full bg-black border border-white/20 p-3 rounded-lg text-white mb-6 focus:outline-none focus:ring-2 focus:ring-[#bd5e2b]"
+            className="w-full bg-surface/50 border border-outline-variant/30 p-3 rounded-lg text-white mb-6 focus:outline-none focus:ring-2 focus:ring-primary"
             value={selectedStream}
             onChange={(e) => setSelectedStream(e.target.value)}
           >
@@ -157,7 +157,7 @@ export default function AptitudeTest({ userProfile, onComplete }) {
               }
               setTestStarted(true);
             }}
-            className="w-full py-3 bg-[#bd5e2b] text-white font-bold rounded-lg hover:bg-[#a44e22] transition-colors"
+            className="w-full py-3 bg-primary text-on-primary font-bold rounded-xl hover:bg-primary/80 hover:shadow-lg hover:shadow-primary/20 transition duration-300"
           >
             Start Test
           </button>
@@ -167,16 +167,20 @@ export default function AptitudeTest({ userProfile, onComplete }) {
   }
 
   return (
-    <div className="flex bg-[#0a0a0a] text-white rounded-2xl overflow-hidden shadow-2xl border border-white/10 min-h-[600px] animate-fadeIn">
-      <div className="w-1/4 p-4 border-r border-gray-700">
-        <h3 className="text-lg font-bold mb-4">Questions</h3>
+    <div className="flex bg-transparent text-white rounded-3xl overflow-hidden shadow-2xl border border-outline-variant/20 min-h-[600px] animate-fadeIn font-body">
+      <div className="w-1/4 p-4 border-r border-outline-variant/20 bg-surface/20">
+        <h3 className="text-lg font-bold mb-4 font-headline text-primary">Questions</h3>
         <ul className="space-y-2">
           {questions.map((_, idx) => (
             <li
               key={idx}
               onClick={() => setCurrent(idx)}
-              className={`p-2 rounded cursor-pointer ${
-                idx === current ? "bg-[#bd5e2b]" : answers[idx] ? "bg-green-600" : "bg-gray-800"
+              className={`p-2.5 rounded-lg cursor-pointer text-center font-semibold transition duration-300 ${
+                idx === current 
+                  ? "bg-primary text-on-primary font-bold shadow-md shadow-primary/20" 
+                  : answers[idx] 
+                    ? "bg-green-600/70 text-white" 
+                    : "bg-surface-variant/40 hover:bg-surface-variant/70 text-on-surface-variant"
               }`}
             >
               Question {idx + 1}
@@ -185,25 +189,25 @@ export default function AptitudeTest({ userProfile, onComplete }) {
         </ul>
       </div>
 
-      <div className="flex-1 p-8 flex flex-col justify-between">
+      <div className="flex-1 p-8 flex flex-col justify-between glass-card">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold">Aptitude Test ({selectedStream})</h2>
-          <span className="text-lg font-semibold text-[#bd5e2b]">
+          <h2 className="text-2xl font-bold font-headline">Aptitude Test ({selectedStream})</h2>
+          <span className="text-lg font-semibold text-primary font-label">
             Time Left: {formatTime(timeLeft)}
           </span>
         </div>
 
         <div>
-          <p className="text-lg mb-4">{questions[current]?.q}</p>
+          <p className="text-xl font-medium mb-6">{questions[current]?.q}</p>
           <div className="space-y-3">
             {questions[current]?.options.map((opt, idx) => (
               <button
                 key={idx}
                 onClick={() => handleAnswer(opt)}
-                className={`block w-full p-3 rounded text-left ${
+                className={`block w-full p-4 rounded-xl text-left border transition duration-300 ${
                   answers[current] === opt
-                    ? "bg-[#bd5e2b] text-white"
-                    : "bg-gray-800 hover:bg-gray-700"
+                    ? "bg-primary text-on-primary font-bold shadow-md shadow-primary/10 border-primary"
+                    : "bg-surface-variant/40 border-outline-variant/10 text-[#f8fafc] hover:bg-surface-variant/70 hover:border-primary/20"
                 }`}
               >
                 {opt}
@@ -215,15 +219,14 @@ export default function AptitudeTest({ userProfile, onComplete }) {
         <div className="mt-6 flex justify-between">
           <button
             onClick={handleSkip}
-            className="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500"
+            className="px-6 py-2.5 rounded-xl bg-surface-variant text-white font-semibold hover:bg-surface-variant/80 transition duration-300"
           >
             Skip
           </button>
           {current === questions.length - 1 && (
             <button
               onClick={handleSubmit}
-              className="px-6 py-2 rounded text-white"
-              style={{ backgroundColor: "#bd5e2b" }}
+              className="px-8 py-2.5 rounded-xl bg-primary text-on-primary font-bold hover:bg-primary/80 hover:shadow-lg hover:shadow-primary/20 transition duration-300"
             >
               Submit
             </button>
