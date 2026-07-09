@@ -9,7 +9,7 @@ CounselMate is a web-based career guidance platform designed to help students ma
 - Personalized recommendations
 - Secure data management
 - Easy navigation and interactive design
-- Scalable architecture for future enhancements
+- Scalable architecture for future enhancements 
 
 ## 🛠️ Tech Stack
 
